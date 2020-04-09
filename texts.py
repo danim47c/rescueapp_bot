@@ -29,13 +29,15 @@ done = 'Hecho'
 okay = 'Vale'
 
 true_field = 'Verdadero'
-false_field = 'Fakse'
+false_field = 'Falso'
 
 # Both strings need the same length
 emoji_yes = ' - ✅'
 emoji_no = ' - ❌'
 
 #? Default Checks
+
+invalid_answer = 'Respuesta inválida'
 
 answer_no_more = 'The answer can\'t contain more than {num} characters'
 answer_no_less = 'The answer can\'t contain less than {num} characters'
@@ -112,4 +114,25 @@ participar_o_opts = [
 ]
 participar_o_cantidad = '¿Qué cantidad ofreces?'
 participar_o_cantidad_numero = 'La cantidad debe ser un número'
+participar_o_descripcion = 'Breve explicacion o descripción de esta oferta'
+participar_o_descripcion_no = 'Desripción inválida'
+participar_o_otro = '¿Quieres ofrecer otro recurso?'
+participar_o_otro_si = 'Sí'
+participar_o_otro_no = 'No'
 
+participar_o_final_quien = '¿Quien eres? (Empresa, universidad, asociación u otros)'
+participar_o_final_nombre = 'Nombre de la empresa, universidad, asociación u otros'
+participar_o_final_persona = 'Persona de contacto'
+participar_o_final_telefono = 'Teléfono'
+participar_o_final_email = 'Email'
+participar_o_final_ciudad = 'Ciudad'
+participar_o_final_cp = 'Código Postal'
+participar_o_final_calle = 'Calle y número'
+participar_o_final_unirse = '¿Quieres unirte al equipo de Rescue App y ayudarnos a escalar el proyecto? Te contactaremos en caso afirmativo'
+participar_o_final_unirse_si = 'Sí'
+participar_o_final_unirse_no = 'No'
+
+participar_o_enviar = '¿Quieres enviar el ofrecimiento?'
+participar_o_enviar_button = 'Enviar'
+
+participar_o_enviado = 'Ofrecimiento enviado correctamente'

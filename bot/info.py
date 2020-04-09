@@ -4,12 +4,14 @@ from teleframework.shortcuts import *
 def info(ctx: BaseContext, chat_id: int = None):
 
   if not chat_id: chat_id = ctx.chat_id
+  
+  """
+    ctx.bot.send_message(
+      chat_id=chat_id,
 
-  ctx.bot.send_message(
-    chat_id=chat_id,
-
-    text=texts.info_1
-  )
+      text=texts.info_1
+    )
+  """
 
   ctx.bot.send_message(
     chat_id=chat_id,
