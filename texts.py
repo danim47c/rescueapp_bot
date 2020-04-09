@@ -115,7 +115,7 @@ participar_o_opts = [
 participar_o_cantidad = '¿Qué cantidad ofreces?'
 participar_o_cantidad_numero = 'La cantidad debe ser un número'
 participar_o_descripcion = 'Breve explicacion o descripción de esta oferta'
-participar_o_descripcion_no = 'Desripción inválida'
+participar_o_descripcion_no = 'Descripción inválida'
 participar_o_otro = '¿Quieres ofrecer otro recurso?'
 participar_o_otro_si = 'Sí'
 participar_o_otro_no = 'No'
@@ -137,3 +137,47 @@ participar_o_enviar_button = 'Enviar'
 participar_o_enviar_button_cancelar = 'Cancelar'
 
 participar_o_enviado = 'Ofrecimiento enviado correctamente'
+
+
+participar_d = 'Elige lo que necesitas #{num}'
+participar_d_otros = '¿Que es específicamente?'
+participar_d_opts = [
+  'Alimentación',
+  'Batas',
+  'Donaciones económicas (€)',
+  'Gafas',
+  'Gel desinfectante',
+  'Guantes',
+  'Mascarillas',
+  'Materiales (textil, pvc...)',
+  'Mensajería',
+  'Pantallas faciales',
+  'Respiradores',
+  'Psicologo',
+  'Otros'
+]
+participar_d_cantidad = '¿Qué cantidad necesitas?'
+participar_d_cantidad_numero = 'La cantidad debe ser un número'
+participar_d_descripcion = 'Breve explicacion o descripción de esta necesidad'
+participar_d_descripcion_no = 'Descripción inválida'
+participar_d_otro = '¿Necesitas otro recurso?'
+participar_d_otro_si = 'Sí'
+participar_d_otro_no = 'No'
+
+participar_d_final_quien = '¿Quien eres? (Centro hospitalario, residencia de mayores, particular u otro)'
+participar_d_final_nombre = 'Nombre del centro hospitalario, residencia de mayores, particular u otro'
+participar_d_final_persona = 'Persona de contacto'
+participar_d_final_telefono = 'Teléfono'
+participar_d_final_email = 'Email'
+participar_d_final_ciudad = 'Ciudad'
+participar_d_final_cp = 'Código Postal'
+participar_d_final_calle = 'Calle y número'
+participar_d_final_unirse = '¿Quieres unirte al equipo de Rescue App y ayudarnos a escalar el proyecto? Te contactaremos en caso afirmativo'
+participar_d_final_unirse_si = 'Sí'
+participar_d_final_unirse_no = 'No'
+
+participar_d_enviar = '¿Quieres enviar la necesidad?'
+participar_d_enviar_button = 'Enviar'
+participar_d_enviar_button_cancelar = 'Cancelar'
+
+participar_d_enviado = 'Necesidad enviado correctamente'

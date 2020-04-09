@@ -1,9 +1,9 @@
 
 from teleframework.shortcuts import *
 
-offer_node = Node()
+demmand_node = Node()
 
-@offer_node.init_func_decorator()
+@demmand_node.init_func_decorator()
 def _(ctx: BaseContext):
     offer = Offer.create(user=ctx.user)
     ctx.user.set_temp_name('oid', offer.oid)
@@ -37,18 +37,18 @@ add_node.register_path(
                         Redirect.create_move(
                             [f'quantity?oaid={article.oaid}']
                         )
-                    )[-1] if not ctx.text == texts.participar_o_opts[-1] else (
+                    )[-1] if not ctx.text == texts.participar_d_opts[-1] else (
                         Redirect.create_go(['other'])
                     )
-                ) for opt in texts.participar_o_opts
+                ) for opt in texts.participar_d_opts
             }    
         ),
         init=lambda ctx: ctx.send_msg(
-            texts.participar_o.format(
-                num=len(
-                    [a for a in Offer.get(oid=ctx.user.temp_name('oid')).articles]
-                )
+          texts.participar_d.format(
+            num=len(
+                [a for a in Offer.get(oid=ctx.user.temp_name('oid')).articles]
             )
+          )
         ),
         back=lambda ctx: (
             (
@@ -62,7 +62,7 @@ add_node.register_path(
     ).register_path(
         'other',
         Node().set_init_func(
-          lambda ctx: ctx.send_msg(texts.participar_o_otros, reply_markup=teletypes.ReplyKeyboardMarkup(teletypes.KeyboardButton(texts.back)))
+          lambda ctx: ctx.send_msg(texts.participar_d_otros, reply_markup=teletypes.ReplyKeyboardMarkup(teletypes.KeyboardButton(texts.back)))
         ).set_func(
           lambda ctx: (
             (
@@ -105,12 +105,12 @@ add_node.register_path(
         )
     ).add_questions(
         (
-            texts.participar_o_cantidad,
+            texts.participar_d_cantidad,
             lambda ctx: (
                 (
                     False
                 ) if ctx.text.isdigit() and int(ctx.text) > 0 else ( 
-                    texts.participar_o_cantidad_numero
+                    texts.participar_d_cantidad_numero
                 )
             ),
             lambda ctx: int(ctx.text)
@@ -139,8 +139,8 @@ add_node.register_path(
         )
     ).add_questions(
         (
-            texts.participar_o_descripcion,
-            lambda ctx: False if len(str(ctx.text)) > 0 else texts.participar_o_descripcion_no
+            texts.participar_d_descripcion,
+            lambda ctx: False if len(str(ctx.text)) > 0 else texts.participar_d_descripcion_no
         )
     )
 )
@@ -157,7 +157,7 @@ final_node.set_init_func(
 final_node.register_path(
     'more',
     BooleanNode(
-        init=texts.participar_o_otro,
+        init=texts.participar_d_otro,
         true=lambda ctx: (
             ctx.user.set_temp_name('oid', ctx.params['oid']),
             Redirect.create_move(
@@ -166,8 +166,8 @@ final_node.register_path(
             )
         )[-1],
         false=Redirect.create_move(['who']),
-        true_field=texts.participar_o_otro_si,
-        false_field=texts.participar_o_otro_no
+        true_field=texts.participar_d_otro_si,
+        false_field=texts.participar_d_otro_no
     )
 )
 
@@ -181,35 +181,35 @@ final_node.register_path(
         )[-1]
     ).add_questions(
         (
-          texts.participar_o_final_quien,
+          texts.participar_d_final_quien,
           lambda ctx: False if len(str(ctx.text)) else texts.invalid_answer
         ),
         (
-          texts.participar_o_final_nombre,
+          texts.participar_d_final_nombre,
           lambda ctx: False if len(str(ctx.text)) else texts.invalid_answer
         ),
         (
-          texts.participar_o_final_persona,
+          texts.participar_d_final_persona,
           lambda ctx: False if len(str(ctx.text)) else texts.invalid_answer
         ),
         (
-          texts.participar_o_final_telefono,
+          texts.participar_d_final_telefono,
           lambda ctx: False if ctx.text.isdigit() and int(ctx.text) > 0 else texts.invalid_answer
         ),
         (
-          texts.participar_o_final_email,
+          texts.participar_d_final_email,
           lambda ctx: False if len(str(ctx.text)) else texts.invalid_answer
         ),
         (
-          texts.participar_o_final_ciudad,
+          texts.participar_d_final_ciudad,
           lambda ctx: False if len(str(ctx.text)) else texts.invalid_answer
         ),
         (
-          texts.participar_o_final_cp,
+          texts.participar_d_final_cp,
           lambda ctx: False if len(str(ctx.text)) else texts.invalid_answer
         ),
         (
-          texts.participar_o_final_calle,
+          texts.participar_d_final_calle,
           lambda ctx: False if len(str(ctx.text)) else texts.invalid_answer
         )
     )
@@ -219,7 +219,7 @@ final_node.register_path(
 final_node.register_path(
     'part',
     BooleanNode(
-        init=texts.participar_o_final_unirse,
+        init=texts.participar_d_final_unirse,
         true=lambda ctx: (
             ctx.user.append_temp_name('answers', True),
             Redirect.create_move(['send'])
@@ -228,8 +228,8 @@ final_node.register_path(
             ctx.user.append_temp_name('answers', False),
             Redirect.create_move(['send'])
         )[-1],
-        true_field=texts.participar_o_final_unirse_si,
-        false_field=texts.participar_o_final_unirse_no
+        true_field=texts.participar_d_final_unirse_si,
+        false_field=texts.participar_d_final_unirse_no
     )
 )
 
@@ -239,10 +239,10 @@ final_node.register_path(
     Node().set_init_func(
     lambda ctx: (
         ctx.send_msg(
-            texts.participar_o_enviar,
+            texts.participar_d_enviar,
             reply_markup=(
                 teletypes.ReplyKeyboardMarkup().row(
-                    teletypes.KeyboardButton(texts.participar_o_enviar_button),
+                    teletypes.KeyboardButton(texts.participar_d_enviar_button),
                     teletypes.KeyboardButton(texts.participar_buttons_cancelar)
                 )
             )
@@ -252,8 +252,8 @@ final_node.register_path(
         lambda ctx: (
             (
                 Redirect.create_go(['']) if ctx.text == texts.participar_buttons_cancelar else Redirect.create_go([])
-            ) if ctx.text != texts.participar_o_enviar_button else (
-                ctx.send_msg(texts.participar_o_enviado),
+            ) if ctx.text != texts.participar_d_enviar_button else (
+                ctx.send_msg(texts.participar_d_enviado),
                 Redirect.create_to([''])
             )[-1]
         )
@@ -261,7 +261,7 @@ final_node.register_path(
 )
 
 
-offer_node.register_path(
+demmand_node.register_path(
     'add',
     add_node
 ).register_path(
@@ -273,7 +273,7 @@ offer_node.register_path(
 def setup(node: Node):
 
     node.register_path(
-        'offer',
-        offer_node
+        'demmand',
+        demmand_node
     )
 

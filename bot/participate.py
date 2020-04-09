@@ -20,11 +20,10 @@ participar_node = MenuNode(
   )
 )
 
-participar_n_node = None
-
 
 participar_node.add_modules(
-  'bot.offer'
+  'bot.offer',
+  'bot.demmand'
 )
 
 
