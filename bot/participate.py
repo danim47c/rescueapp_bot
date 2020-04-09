@@ -8,15 +8,68 @@ participar_node = MenuNode(
 ).add_options(
   (
     texts.participar_buttons_o,
-    Redirect.create_go(['ofrecer'])
+    Redirect.create_go(['offer'])
   ),
   (
     texts.participar_buttons_n,
-    Redirect.create_go(['necesitar'])
+    Redirect.create_go(['demmand'])
   ),
   (
     texts.participar_buttons_cancelar,
     Redirect.create_back()
+  )
+).register_path(
+  'offer',
+  Node().set_init_func(
+    lambda ctx: (
+      ctx.user.set_temp_name('ofrecimiento', []),
+      Redirect.create_go(['add'])
+    )
+  ).register_path(
+    'add',
+    Redirect.create_go('choose'))
+  ).register_path(
+    'choose',
+    ListNode(
+      options_gen={
+        opt: lambda ctx: (
+          ctx.user.append_temp_name('ofrece', {'opcion': ctx.text}),
+          Redirect.create_move(
+            ['quantity']
+          ) if opt != texts.participar_o_opts[-1] else 
+          Redirect.create_go(
+            ['other']
+          )
+        )[-1] for opt in texts.participar_o_opts
+      },
+      init=texts.participar_o,
+      back=Redirect.create_back(2)
+    ).register_path(
+      'other',
+      Node().set_init_func(
+        lambda ctx: ctx.send_msg(texts.participar_o_otros, reply_markup=teletypes.ReplyKeyboardMarkup(teletypes.KeyboardButton(texts.back)))
+      ).set_func(
+        lambda ctx: (
+          ctx.user.update_temp_name('ofrece', {'opcion': ctx.text}),
+          Redirect.create_back() if ctx.text == texts.back else Redirect.create_go(['quantity'], 1)
+        )[-1]
+      )
+    )
+  ).register_path(
+    f'quantity',
+    FormNode(
+      final=lambda ctx: (
+        ctx.user.update_temp_name('ofrece', {'cantidad': ctx.params['answers'][0]}),
+        Redirect.create_move()
+      )[-1],
+      back=Redirect.create_move(['choose'])
+    ).add_questions(
+      (
+        texts.participar_o_cantidad,
+        lambda ctx: False if ctx.text.isdigit() else texts.participar_o_cantidad_numero,
+        lambda ctx: int(ctx.text)
+      )
+    )
   )
 )
 
@@ -35,14 +88,15 @@ participar_o_node.register_path(
   'choose',
   ListNode(
     options_gen={
-      opt: (
+      opt: lambda ctx: (
+        ctx.user.update_temp_name('ofrece', {'opcion': ctx.text}),
         Redirect.create_move(
-          [f'quantity?opt={opt}']
+          ['quantity']
         ) if opt != texts.participar_o_opts[-1] else 
         Redirect.create_go(
           ['other']
         )
-      ) for opt in texts.participar_o_opts
+      )[-1] for opt in texts.participar_o_opts
     },
     init=texts.participar_o,
     back=Redirect.create_back(2)
@@ -51,13 +105,19 @@ participar_o_node.register_path(
     Node().set_init_func(
       lambda ctx: ctx.send_msg(texts.participar_o_otros, reply_markup=teletypes.ReplyKeyboardMarkup(teletypes.KeyboardButton(texts.back)))
     ).set_func(
-      lambda ctx: Redirect.create_back() if ctx.text == texts.back else Redirect.create_go([f'quantity?opt={ctx.text}'], 1)
+      lambda ctx: (
+        ctx.user.update_temp_name('ofrece', {'opcion': ctx.text}),
+        Redirect.create_back() if ctx.text == texts.back else Redirect.create_go(['quantity'], 1)
+      )[-1]
     )
   )
 ).register_path(
   f'quantity',
   FormNode(
-    final=lambda ctx: None,
+    final=lambda ctx: (
+      ctx.user.update_temp_name('ofrece', {'cantidad': ctx.params['answers'][0]}),
+      Redirect.create_move()
+    )[-1],
     back=Redirect.create_move(['choose'])
   ).add_questions(
     (
