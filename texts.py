@@ -134,5 +134,6 @@ participar_o_final_unirse_no = 'No'
 
 participar_o_enviar = '¿Quieres enviar el ofrecimiento?'
 participar_o_enviar_button = 'Enviar'
+participar_o_enviar_button_cancelar = 'Cancelar'
 
 participar_o_enviado = 'Ofrecimiento enviado correctamente'
