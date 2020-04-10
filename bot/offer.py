@@ -41,14 +41,15 @@ add_node.register_path(
                         Redirect.create_go(['other'])
                     )
                 ) for opt in texts.participar_o_opts
-            }    
+            }
         ),
         init=lambda ctx: ctx.send_msg(
             texts.participar_o.format(
                 num=len(
                     [a for a in Offer.get(oid=ctx.user.temp_name('oid')).articles]
                 )
-            )
+            ),
+            default_markup=True
         ),
         back=lambda ctx: (
             (

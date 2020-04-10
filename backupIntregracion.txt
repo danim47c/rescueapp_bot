@@ -1,0 +1,183 @@
+function doPost(request) {
+    var jsn = JSON.parse(request.postData.contents);
+    //var jsn = JSON.parse(request);
+    var answers = jsn.form_response.answers;
+    var more;  // more data sets to read?
+    let newTypeform = {
+      Tipo__c: tipo
+    };
+    
+    Logger.log('Printing array info using for loop.');
+    for (var index in  answers){
+      var valor = '';
+      Logger.log(index);
+      var tipo = answers[index].type;
+      if(tipo === 'choice'){
+        valor = answers[index][tipo].label
+      }else{
+        valor = answers[index][tipo];
+      }
+      var ref = answers[index].field.ref
+      Logger.log(tipo);
+      Logger.log(valor);
+      Logger.log(ref);
+      switch (ref)  {
+        case "01E0D1ATXHV9RV805P8MNV84GW":
+            newTypeform.Tipo__c = valor;
+            break;
+        case "09c80456-1690-4691-af26-c56079b39352":
+            newTypeform.Oferta_1__c = valor;
+            break;
+        case "ca8e33b5-f254-40fa-9ebe-8988f0ab4074":
+            newTypeform.Cantidad_oferta_1__c = valor;
+            break;
+        case "618bee48-b7ec-4f56-ac85-55d49720fcab":
+            newTypeform.Otros_oferta_1__c = valor;
+            break;
+        case "6b16cc74-5532-4970-aaec-ab34842131ca":
+            newTypeform.Descripcion_oferta_1__c = valor;
+            break;
+        case "25ed1e01-b577-4ab4-abfc-c46466e27846":
+            newTypeform.Otra_oferta_1__c = valor;
+            break;
+        case "92324862-1f7f-4db0-8b7c-60febb48cd30":
+            newTypeform.Oferta_2__c = valor;
+            break;
+         case "f650dd35-fd88-4f8a-b31f-cba3edd4b9f6":
+            newTypeform.Otros_oferta_2__c = valor;
+            break;
+         case "ca251b3c-9a7b-4342-ade8-5a8a16484f01":
+            newTypeform.Cantidad_oferta_2__c = valor;
+            break;
+         case "fc06a190-bec1-45ea-a45b-a70f22029ba2":
+            newTypeform.Descripcion_oferta_2__c = valor;
+            break;
+         case "8cb700ac-9033-49bb-b7a0-a9645d2557fa":
+            newTypeform.Otra_oferta_2__c = valor;
+            break;
+         case "18c35edb-1dc3-4069-ac0d-a2d69aaba889":
+            newTypeform.Oferta_3__c = valor;
+            break;
+         case "66202c4a-c9db-40ac-9f79-9a8a689a0ad4":
+            newTypeform.Otros_oferta_3__c = valor;
+            break;
+         case "93b70619-6b93-40a8-bc02-113fd67db3fb":
+            newTypeform.Cantidad_oferta_3__c = valor;
+            break;
+         case "011fc60f-6ca2-4304-8cba-df3e19dc4feb":
+            newTypeform.Descripcion_oferta_3__c = valor;
+            break;
+         case "2b9c2e83-31c5-40ca-a0f8-c541924521dc":
+            newTypeform.Otra_oferta_3__c = valor;
+            break;
+        case "01E0D1ATXJ0K3QSY9D70B40A21":
+            newTypeform.Quien_eres_1__c = valor;
+            break;
+        case "01E0D1ATXNVQGY9906RFEQ8H7F":
+            newTypeform.Quien_eres_2__c = valor;
+            break;
+        case "01E0D1ATXNQG5PABSMNK7PX2Z8":
+            newTypeform.Nombre_de_empresa__c = valor;
+            break;
+        case "01E0D1ATXNHQT0J8D3PXXX22HY":
+            newTypeform.Persona_de_contacto__c = valor;
+            break;
+        case "01E0D1ATXN6RSTK52BWB7EX3KY":
+            newTypeform.Telefono__c = valor;
+            break;
+        case "01E0D1ATXN6T42B0C9DG0RQZYW":
+            newTypeform.Email__c = valor;
+            break;
+         case "01E0D1ATXNGXPQDA2440G2V856":
+            newTypeform.Ciudad__c = valor;
+            break;
+         case "01E0D1ATXN9Q2HSCD16EWFY9H5":
+            newTypeform.Cdigo_postal__c = valor;
+            break;
+         case "01E0D1ATXNXVNN6109D9TS5KYT":
+            newTypeform.Direccion__c = valor;
+            break;
+         case "7dc2b32d-b17b-46b9-91b5-b25e5a0a7121":
+            newTypeform.Unirte__c = valor;
+            break;
+         case "01E0D1ATXP7WTF6CSJRDXG81TJ":
+            newTypeform.Necesidad_1__c = valor;
+            break;
+         case "4805d8a7-b53e-4fd5-9f61-7eee962dd286":
+            newTypeform.Otros_1__c = valor;
+            break;
+         case "37aca88f-efb8-4a87-957c-265552d19475":
+            newTypeform.Cantidad_1__c = valor;
+            break;
+         case "f70a6c48-69b6-40f5-be4e-148f8284a720":
+            newTypeform.Descripcion_1__c = valor;
+            break;
+         case "dbd50619-14d5-45a6-8258-760207fe2b2c":
+            newTypeform.Otra_necesidad_1__c = valor;
+            break;
+        case "3c7d9c3f-49c4-4251-8851-f51150a22b3f":
+            newTypeform.Necesidad_2__c = valor;
+            break;
+         case "4906f3d4-721f-4582-b014-cce912327976":
+            newTypeform.Otros_2__c = valor;
+            break;
+         case "95679e07-6320-422f-b20d-c687619203af":
+            newTypeform.Cantidad_2__c = valor;
+            break;
+         case "e9edc0af-8fd8-41ae-b5a7-61b0366e1c54":
+            newTypeform.Descripcion_2__c = valor;
+            break;
+         case "5384f53a-d946-416b-a8d6-6806accd69a9":
+            newTypeform.Otra_necesidad_2__c = valor;
+            break;
+         case "a7656db3-3d4e-4454-b7d4-7f0d0b42d6ba":
+            newTypeform.Necesidad_3__c = valor;
+            break;
+         case "ea8fb3c4-ce49-44fb-8739-de18ea4afc88":
+            newTypeform.Otros_3__c = valor;
+            break;
+         case "7eb12bfd-a991-4911-93a3-1fead5c954a3":
+            newTypeform.Cantidad_3__c = valor;
+            break;
+         case "ad49a39c-d8b8-45a3-9aa4-7fd044a9ea43":
+            newTypeform.Descripcion_3__c = valor;
+            break;
+         case "6e71c352-cfe1-4841-8aaa-6787dd81389b":
+            newTypeform.Otra_necesidad_3__c = valor;
+            break;
+        default:
+            break;
+    }
+    }
+
+ 
+    
+   
+    
+    
+    /////////////////////////////////////////////////////////////////////////
+                    
+    var optionsAuth = {
+      'method' : 'post'
+    };
+    
+    // we make this call to retrieve an access token, using our typeformConnect salesforce connected app (client & secret found there)
+    var response = UrlFetchApp.fetch("https://login.salesforce.com/services/oauth2/token?grant_type=password&client_id=3MVG9wEVwV0C9ejCCh0zY_0PN_gyc4yX8CRvov1jfcSXqjIMYlb67v6i1oVPTjH.9Rhc8lRbpaxvVRT4FjOpg&client_secret=264491B8AA0CC4066707EFEFDF76386D7B393B7991D40D75CE325A63CE9D7D03&username=dani@rescueapp.es&password=Corona2020", optionsAuth);
+    var jsnAuth = JSON.parse(response)
+    
+    var options = {
+      'method' : 'post',
+      'contentType': 'application/json',
+      'payload' : JSON.stringify(newTypeform),
+      'muteHttpExceptions' : true,
+      "headers" : {
+        "Authorization" : "Bearer " + jsnAuth.access_token
+      }
+    };
+    
+    // send the json to salesforce
+    var response = UrlFetchApp.fetch("https://rescueapp.my.salesforce.com/services/data/v20.0/sobjects/typeform__c/", options);
+
+    return ContentService.createTextOutput(response);   
+     
+}
