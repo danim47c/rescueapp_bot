@@ -150,7 +150,7 @@ add_node.register_path(
 final_node = Node()
 
 final_node.set_init_func(
-    lambda ctx: Redirect.create_go(['more'])
+    lambda ctx: Redirect.create_go(['more'] if len([a for a in Offer.get(oid=ctx.params['oid']).articles]) < 3 else ['who'])
 )
 
 # More
